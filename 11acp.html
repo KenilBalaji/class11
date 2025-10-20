@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ice Cream</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            color: #222;
+        }
+        /* Modal styles */
+        .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.45); z-index: 1000; }
+        .modal[aria-hidden="false"] { display: flex; }
+    /* ice-cream themed modal content with sprinkles */
+    .modal-content { background: linear-gradient(180deg, #fff8f0 0%, #fff0f6 100%); width: 90%; max-width: 600px; padding: 20px; border-radius: 18px; box-shadow: 0 12px 40px rgba(0,0,0,0.2); position: relative; max-height: calc(100vh - 80px); overflow-y: auto; -webkit-overflow-scrolling: touch; border: 6px solid rgba(255,255,255,0.6); }
+    .modal-content::before{ content: ""; position:absolute; inset:0; background-image: radial-gradient(circle at 10% 20%, rgba(255,200,230,0.35) 0 6px, transparent 7px), radial-gradient(circle at 80% 60%, rgba(200,240,255,0.28) 0 6px, transparent 7px); border-radius: 12px; pointer-events:none; mix-blend-mode:screen; }
+        .close { position: absolute; right: 12px; top: 8px; background: transparent; border: none; font-size: 28px; cursor: pointer; color: #b04b6a; }
+        .modal-top { text-align: center; margin-bottom: 10px; }
+    .ice-img { width: 260px; height: auto; display: block; margin: 0 auto 6px auto; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.12)); }
+    .modal-section { margin-top: 12px; }
+    .modal-thanks { text-align: center; margin-top: 18px; }
+        .modal-section h3 { margin: 6px 0; color: #b04b6a; }
+    @media (min-width:600px) { .modal-content { padding: 28px; } .ice-img { width: 320px; } }
+        /* Button */
+        #openModal { display:block; margin:20px auto; padding:16px 28px; font-size:20px; cursor:pointer; border-radius:36px; background: linear-gradient(90deg,#ffd37a,#ffb86b); border: none; color:#5a2a2a; box-shadow: 0 8px 18px rgba(255,160,90,0.25); font-weight:600; }
+        #openModal:hover{ transform: translateY(-2px); box-shadow: 0 12px 24px rgba(255,160,90,0.28); }
+    </style>
+</head>
+<body>
+    <h1>Ice Cream</h1>
+    <p>Ice cream is a sweetened frozen food typically eaten as a snack or dessert. It is usually made from dairy products, such as milk and cream, and often combined with fruits or other ingredients and flavors.</p>
+    <p>Ice cream is a popular treat around the world and comes in a variety of flavors, including vanilla, chocolate, strawberry, and many more. It can be served in cones, cups, or as part of other desserts like sundaes and milkshakes.</p>
+    <button id="openModal">Learn about Ice Cream</button>
+
+    <!-- Modal -->
+    <div id="iceModal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="close" aria-label="Close modal">&times;</button>
+            <div class="modal-top">
+                <!-- Put your image at images/ice-cream.png or images/ice-cream.svg -->
+                <img src="images/ice-cream.svg" alt="Ice cream" class="ice-img">
+            </div>
+            <h2 id="modalTitle">Ice Cream - More Information</h2>
+            <div class="modal-section">
+                <h3>When?</h3>
+                <p>Ice cream doesn’t have a single invention date—frozen sweet treats date back over 2,000 years in places like China and Persia, while dairy-based recipes close to modern ice cream appeared in Europe between the 1500s and 1700s.</p>
+            </div>
+            <div class="modal-section">
+                <h3>Where?</h3>
+                <p>Ice cream is enjoyed worldwide, with popular variations such as gelato (Italy), kulfi (India), and mochi ice cream (Japan). It’s commonly found in shops, parlors, and grocery stores.</p>
+            </div>
+            <div class="modal-section">
+                <h3>Who?</h3>
+                <p>People of all ages enjoy ice cream. It’s a favorite at celebrations and everyday treats alike, with chefs and home cooks continually inventing new flavors.</p>
+            </div>
+            <div class="modal-section">
+                <h3>What?</h3>
+                <p>Modern ice cream blends milk or cream, sugar, flavorings, and air from churning; refrigeration and 19th-century innovations made it affordable and popular worldwide.</p>
+            </div>
+            <div class="modal-section modal-thanks">
+                <h3>Thank You!</h3>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Modal behavior
+    (function(){
+        const openBtn = document.getElementById('openModal');
+        const modal = document.getElementById('iceModal');
+        const closeBtn = modal.querySelector('.close');
+
+        function openModal(){ modal.setAttribute('aria-hidden','false'); document.body.style.overflow = 'hidden'; }
+        function closeModal(){ modal.setAttribute('aria-hidden','true'); document.body.style.overflow = ''; }
+
+        openBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+        document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal(); });
+    })();
+    </script>
+
+
+
+</body>
+</html>
